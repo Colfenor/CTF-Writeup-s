@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 require"base64"
 puts"write some text and hit enter:"
 input=gets.chomp
