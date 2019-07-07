@@ -20,7 +20,7 @@ I decided to tackle this challenge by stepwise disecting the ruby code and to se
 ruby statement does with a given input.
 
 The "lost" ruby script in question:
-```
+```ruby
 require"base64"
 puts"write some text and hit enter:"
 input=gets.chomp
@@ -76,7 +76,7 @@ however there is 1 decimal place missing ?
 
 The secret string "haha" which I entered in the sloppy.rb script
 was encrypted to 
-`KWzxE6JKUr9Z1hvmje9CIt9mB3huk7BBNxuhAYixQst8H///////////xgLGAw==`
+> KWzxE6JKUr9Z1hvmje9CIt9mB3huk7BBNxuhAYixQst8H///////////xgLGAw==
 
 I decided to just start from the end of the encryption script and turn 
 things around :)
