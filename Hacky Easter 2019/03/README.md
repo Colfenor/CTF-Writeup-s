@@ -32,7 +32,7 @@ b=Base64.encode64(c)
 puts"encrypted text:""#{b}"
 ```
 
-I used a test input: "hihi"
+I used a test input: "haha"
 
 Starting with `input=gets.chomp` gets.chomp removes the line break read by gets
 
@@ -48,3 +48,22 @@ string characters into their ASCII decimal value (e.g character'a' to decimal 97
 this line of code, basically seems to add 0X to the start of the string which
 is converted into an int via ".to_i()"
 puts "hey ox #{ox}" # hex -> 0X68616861 which is 1751214177 in dec
+
+`x=ox.to_i(16)*(['5'].cycle(101).to_a.join.to_i)`
+
+This step was probably the hardest to understand properly.
+.to_a() -> to "array"
+Returns the result of interpreting leading characters
+in str as an integer base base (between 2 and 36).
+so: "0a".to_i(16) -> 10, and 10.to_s(16) -> a, leading zero is missing
+
+This statement apparently
+takes the given number and ADDS a 5 to the end of that number !
+`y = ox.to_i(16)*['5'].to_a.join.to_i`
+`puts "#{y}" # decimal`
+
+`z = y/['5'].to_a.join.to_i`
+sort of the revese function from above
+however there is 1 decimal place missing ?
+
+-------------------------------------------------
