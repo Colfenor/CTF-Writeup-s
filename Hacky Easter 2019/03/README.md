@@ -47,7 +47,7 @@ string characters into their ASCII decimal value (e.g character'a' to decimal 97
 
 this line of code, basically seems to add 0X to the start of the string which
 is converted into an int via ".to_i()"
-puts "hey ox #{ox}" # hex -> 0X68616861 which is 1751214177 in dec
+puts "hey ox #{ox}" # hex -> 0X68616861 which is 1751214177 in decimal
 
 `x=ox.to_i(16)*(['5'].cycle(101).to_a.join.to_i)`
 
@@ -59,11 +59,33 @@ so: "0a".to_i(16) -> 10, and 10.to_s(16) -> a, leading zero is missing
 
 This statement apparently
 takes the given number and ADDS a 5 to the end of that number !
-`y = ox.to_i(16)*['5'].to_a.join.to_i`
-`puts "#{y}" # decimal`
+
+```
+y = ox.to_i(16)*['5'].to_a.join.to_i
+puts "#{y}" # decimal
+```
 
 `z = y/['5'].to_a.join.to_i`
+
 sort of the revese function from above
 however there is 1 decimal place missing ?
 
--------------------------------------------------
+---------------------------------------------------
+
+### Reverse writing the ruby script
+
+The secret string "haha" which I entered in the sloppy.rb script
+was encrypted to 
+`KWzxE6JKUr9Z1hvmje9CIt9mB3huk7BBNxuhAYixQst8H///////////xgLGAw==`
+
+I decided to just start from the end of the encryption script and turn 
+things around :)
+
+`enB = Base64.decode64(str)`
+And to start things of I would first decode the string from Base64.
+
+Next the ruby scan(/./) splits the string into desired array format
+and .map(&:ord) converts from char code into hexadecimal and
+.collect{ |num| "02X" % num} converts from dec to char
+
+`ah = enB.scan(/./).map(&:ord).collect{|num| "%02X" % num}.join`
