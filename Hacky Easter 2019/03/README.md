@@ -76,7 +76,7 @@ however there is 1 decimal place missing ?
 
 The secret string "haha" which I entered in the sloppy.rb script
 was encrypted to 
-> KWzxE6JKUr9Z1hvmje9CIt9mB3huk7BBNxuhAYixQst8H///////////xgLGAw==
+* KWzxE6JKUr9Z1hvmje9CIt9mB3huk7BBNxuhAYixQst8H///////////xgLGAw==
 
 I decided to just start from the end of the encryption script and turn 
 things around :)
@@ -84,8 +84,37 @@ things around :)
 `enB = Base64.decode64(str)`
 And to start things of I would first decode the string from Base64.
 
+`ah = enB.scan(/./).map(&:ord).collect{|num| "%02X" % num}.join`
+
 Next the ruby scan(/./) splits the string into desired array format
 and .map(&:ord) converts from char code into hexadecimal and
 .collect{ |num| "02X" % num} converts from dec to char
 
-`ah = enB.scan(/./).map(&:ord).collect{|num| "%02X" % num}.join`
+`revX = ah.to_i(16)/(['5'].cycle(101).to_a.join.to_i)`
+
+Instead of multiplying in the encryption script I tried the reverse step 
+and divide by ['5'].cycle(101).to_a.join.to_i
+
+`revH = revX.to_s(16).scan(/../).collect{|num| "0x" + num}`
+
+Here we convert the huge decimal number revH to individual hexadecimal values
+and save that as an array/enumerable
+
+`plain_text = revH.collect{|num| num.to_i(16).chr}.join`
+
+and in the last step above we convert the individual hexadecimal values into 
+their corresponding ASCII character and join them together to display the
+desired decrypted input again
+* haha
+
+When entering the encrypted flag
+> K7sAYzGlYx0kZyXIIPrXxK22DkU4Q+rTGfUk9i9vA60C/ZcQOSWNfJLTu4RpIBy/27yK5CBW+UrBhm0=
+
+this decrypts to 
+
+> n00b_style_crypto
+
+which upon entry at the hacking lab website yields a QR code which the Egg-O-Matic decodes to:
+> he19-YPkZ-ZZpf-nbYt-6ZyD
+
+The code to mark this challenge as solved :) 
